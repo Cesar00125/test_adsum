@@ -38,7 +38,16 @@ export class FormComponent implements OnInit {
     )
   }
 
-  validateEmail() {
+  validateFields() {
+    
+  } 
+
+  async validateEmail() {
+    const { fullname, company, email, phone, message, category_id } = this.form
+    if (fullname === '' || company === '' || email === '' || phone === '' || message === '' || category_id < 1) {
+      const messageError = "Por favor complete los campos requeridos"
+      return this.error = <any>messageError
+    }
     this.clearAlerts()
     this.FormService.validateEmail({ email: this.form.email }).subscribe(
       res=>{
